@@ -25,6 +25,13 @@ pipeline {
                 sh 'echo "No tests yet"'
             }
         }
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('sonar-server') {
+                    sh 'mvn sonar:sonar'
+                }
+            }
+        }
 
         stage('Docker Build') {
             steps {
